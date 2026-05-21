@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+  background: #070318;
+  color: #f4ecd8;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 800px at 50% -10%, rgba(122, 61, 245, 0.18), transparent 60%),
+    radial-gradient(900px 600px at 10% 110%, rgba(230, 41, 75, 0.16), transparent 65%),
+    radial-gradient(900px 600px at 90% 110%, rgba(255, 149, 51, 0.14), transparent 65%),
+    #070318;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Smoke layer */
+.smoke-bg::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 195, 112, 0.07), transparent 35%),
+    radial-gradient(circle at 80% 60%, rgba(255, 77, 109, 0.08), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(122, 61, 245, 0.07), transparent 40%);
+  filter: blur(20px);
+  pointer-events: none;
+  animation: float 14s ease-in-out infinite;
+}
+
+/* Heading shimmer */
+.shimmer-text {
+  background: linear-gradient(
+    100deg,
+    #f4d27a 0%,
+    #ffe6b8 25%,
+    #ff7aa8 50%,
+    #ffe6b8 75%,
+    #f4d27a 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+
+/* Gold gradient text */
+.text-gold-grad {
+  background: linear-gradient(135deg, #f4d27a 0%, #d9a441 60%, #a87622 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Ember button */
+.btn-ember {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #1a0a04;
+  background: linear-gradient(135deg, #ffd27a 0%, #ff9533 50%, #e6294b 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 220, 160, 0.4) inset,
+    0 10px 30px rgba(230, 41, 75, 0.35),
+    0 0 40px rgba(255, 149, 51, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-ember:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 0 0 1px rgba(255, 220, 160, 0.6) inset,
+    0 14px 36px rgba(230, 41, 75, 0.55),
+    0 0 70px rgba(255, 149, 51, 0.7);
+}
+
+/* Glass card */
+.glass {
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  border: 1px solid rgba(255, 220, 160, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.glass-strong {
+  background: linear-gradient(
+      180deg,
+      rgba(31, 24, 81, 0.55) 0%,
+      rgba(12, 8, 34, 0.55) 100%
+    );
+  border: 1px solid rgba(255, 220, 160, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Sigil glow rings */
+.sigil-glow {
+  filter: drop-shadow(0 0 18px rgba(255, 195, 112, 0.55))
+    drop-shadow(0 0 36px rgba(230, 41, 75, 0.35));
+}
+
+/* Floating WA button pulse */
+.wa-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  background: rgba(37, 211, 102, 0.45);
+  filter: blur(6px);
+  animation: pulse 2.4s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+/* Section divider with sigil */
+.divider-sigil {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(244, 210, 122, 0.5);
+}
+
+.divider-sigil::before,
+.divider-sigil::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 210, 122, 0.35),
+    transparent
+  );
+}
+
+/* Hover tilt */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.tilt-card:hover {
+  transform: perspective(1000px) rotateX(6deg) rotateY(-6deg) translateZ(8px);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #070318;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7a3df5, #e6294b);
+  border-radius: 6px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 149, 51, 0.4);
+  color: #fff;
+}
+
+/* Section padding helpers */
+.section {
+  position: relative;
+  padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.container-x {
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+}
