@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
 import Sigil from '../components/Sigil'
 import { SITE } from '../lib/constants'
@@ -128,6 +129,19 @@ ${story || 'Please advise me on a ritual that would help.'}`
                   Replies usually within minutes.
                 </span>
               </div>
+
+              <p className="mt-6 font-serif text-xs leading-relaxed text-ember-100/55">
+                By contacting Maama Salma you agree to the spiritual practice
+                terms in the{' '}
+                <Link
+                  to="/disclaimer"
+                  className="underline decoration-gold-500/40 underline-offset-4 hover:text-ember-200"
+                >
+                  disclaimer
+                </Link>
+                . Results may vary and payments are non-refundable once work has
+                started.
+              </p>
             </div>
           </motion.div>
 
