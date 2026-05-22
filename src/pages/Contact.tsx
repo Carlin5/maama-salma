@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
 import Sigil from '../components/Sigil'
+import DisclaimerNotice from '../components/DisclaimerNotice'
 import { SITE } from '../lib/constants'
 
 export default function Contact() {
@@ -230,6 +231,8 @@ ${story || 'Please advise me on a ritual that would help.'}`
           </motion.div>
         </div>
       </section>
+
+      <DisclaimerNotice />
     </div>
   )
 }
