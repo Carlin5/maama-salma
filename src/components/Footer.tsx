@@ -64,11 +64,20 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-gold-500/10">
-        <div className="container-x flex flex-col items-start gap-2 py-5 text-xs text-ember-100/40 md:flex-row md:items-center md:justify-between">
+        <div className="container-x flex flex-col items-start gap-3 py-5 text-xs text-ember-100/40 md:flex-row md:items-center md:justify-between">
           <span>© {new Date().getFullYear()} Maama Salma — All rituals reserved.</span>
-          <span className="font-display tracking-[0.25em]">
-            ✦ LOVE · LIGHT · RITUAL ✦
-          </span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <Link
+              to="/disclaimer"
+              className="uppercase tracking-[0.25em] text-ember-100/60 transition hover:text-ember-200"
+            >
+              Disclaimer
+            </Link>
+            <span className="hidden h-3 w-px bg-gold-500/20 md:inline-block" />
+            <span className="font-display tracking-[0.25em]">
+              ✦ LOVE · LIGHT · RITUAL ✦
+            </span>
+          </div>
         </div>
       </div>
     </footer>

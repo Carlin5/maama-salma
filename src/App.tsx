@@ -8,6 +8,7 @@ import Services from './pages/Services'
 import About from './pages/About'
 import Testimonials from './pages/Testimonials'
 import Contact from './pages/Contact'
+import Disclaimer from './pages/Disclaimer'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -37,6 +38,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/disclaimer" element={<Disclaimer />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </motion.div>
