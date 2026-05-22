@@ -6,6 +6,7 @@ import Sigil from '../components/Sigil'
 import TiltCard from '../components/TiltCard'
 import ParallaxImage from '../components/ParallaxImage'
 import HeartBurst from '../components/HeartBurst'
+import DisclaimerNotice from '../components/DisclaimerNotice'
 import { SITE } from '../lib/constants'
 import candleSmoke from '../assets/photos/candle-smoke.jpg'
 import lovePortion from '../assets/photos/love-portion.jpg'
@@ -516,6 +517,8 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <DisclaimerNotice />
     </div>
   )
 }
