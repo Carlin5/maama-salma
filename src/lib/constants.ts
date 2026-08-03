@@ -5,7 +5,7 @@ export const SITE = {
   phoneRaw: '+27604034585',
   whatsappLink:
     'https://wa.me/27604034585?text=Hello%20Maama%20Salma%2C%20I%20would%20like%20a%20love%20spell%20consultation.',
-  email: 'maama.salma@example.com',
+  email: 'gogosalma33@gmail.com',
   experienceYears: 25,
   clientsHelped: '15,000+',
 }
