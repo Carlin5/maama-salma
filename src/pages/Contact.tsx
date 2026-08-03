@@ -19,7 +19,7 @@ My name is ${name || '...'}
 I am interested in: ${ritual}
 
 ${story || 'Please advise me on a ritual that would help.'}`
-    return `https://wa.me/27604034585?text=${encodeURIComponent(text)}`
+    return `https://wa.me/27630070453?text=${encodeURIComponent(text)}`
   }
 
   return (
