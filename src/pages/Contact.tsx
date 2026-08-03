@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { MdEmail } from 'react-icons/md'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
@@ -18,7 +19,7 @@ My name is ${name || '...'}
 I am interested in: ${ritual}
 
 ${story || 'Please advise me on a ritual that would help.'}`
-    return `https://wa.me/27604034585?text=${encodeURIComponent(text)}`
+    return `https://wa.me/27630070453?text=${encodeURIComponent(text)}`
   }
 
   return (
@@ -184,6 +185,20 @@ ${story || 'Please advise me on a ritual that would help.'}`
                     className="mt-1 inline-block font-serif text-xl text-ember-100 hover:text-ember-200"
                   >
                     {SITE.phone}
+                  </a>
+                </li>
+                <li>
+                  <div className="font-display text-[11px] uppercase tracking-[0.25em] text-gold-400">
+                    Email
+                  </div>
+                  <a
+                    href={`mailto:${SITE.email}`}
+                    className="mt-1 inline-flex items-center gap-2 font-serif text-xl text-ember-100 hover:text-ember-200"
+                  >
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gold-500/20 text-gold-400">
+                      <MdEmail size={16} />
+                    </span>
+                    {SITE.email}
                   </a>
                 </li>
                 <li>

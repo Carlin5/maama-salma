@@ -1,3 +1,4 @@
+import { MdEmail } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { NAV_LINKS, SITE } from '../lib/constants'
 
@@ -55,6 +56,17 @@ export default function Footer() {
                   </svg>
                 </span>
                 <span>WhatsApp · {SITE.phone}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${SITE.email}`}
+                className="inline-flex items-center gap-2 hover:text-ember-200"
+              >
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gold-500/20 text-gold-400">
+                  <MdEmail size={14} />
+                </span>
+                <span>{SITE.email}</span>
               </a>
             </li>
             <li className="text-ember-100/60 text-sm">
