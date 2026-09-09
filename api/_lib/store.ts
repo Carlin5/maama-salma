@@ -45,11 +45,14 @@ export async function setJSON<T>(key: string, value: T): Promise<void> {
 export async function listPush<T>(key: string, value: T): Promise<void> {
   if (remote()) {
     await command(['LPUSH', key, JSON.stringify(value)])
-    await command(['LTRIM', key, '0', '4999'])
+    if (key === 'visits' || key === 'events') {
+      await command(['LTRIM', key, '0', '4999'])
+    }
     return
   }
   const values = (memory().get(key) as T[] | undefined) || []
-  memory().set(key, [value, ...values].slice(0, 5000))
+  const next = [value, ...values]
+  memory().set(key, key === 'visits' || key === 'events' ? next.slice(0, 5000) : next)
 }
 
 export async function listRange<T>(key: string, start: number, stop: number): Promise<T[]> {
@@ -57,7 +60,8 @@ export async function listRange<T>(key: string, start: number, stop: number): Pr
     const values = await command<string[]>(['LRANGE', key, start, stop])
     return values.map((value) => JSON.parse(value) as T)
   }
-  return ((memory().get(key) as T[] | undefined) || []).slice(start, stop + 1)
+  const values = (memory().get(key) as T[] | undefined) || []
+  return stop === -1 ? values.slice(start) : values.slice(start, stop + 1)
 }
 
 export async function listLen(key: string): Promise<number> {

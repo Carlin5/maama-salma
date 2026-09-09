@@ -16,7 +16,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' })
   const visits = await listRange<VisitRecord>('visits', 0, 4999)
   const clicks = await listRange<ClickRecord>('events', 0, 4999)
-  const ids = await listRange<string>('messages', 0, 4999)
+  const ids = await listRange<string>('messages', 0, -1)
   const messages = (
     await Promise.all(ids.map((id) => getJSON<MessageRecord>(`message:${id}`)))
   ).filter((message): message is MessageRecord => Boolean(message))

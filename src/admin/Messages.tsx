@@ -16,6 +16,7 @@ export default function Messages({
   const [selected, setSelected] = useState<MessageRecord | null>(messages[0] || null)
   const [filter, setFilter] = useState<'all' | MessageRecord['status']>('all')
   const [reply, setReply] = useState('')
+  const [replyError, setReplyError] = useState('')
   const filtered = useMemo(
     () => messages.filter((message) => filter === 'all' || message.status === filter),
     [messages, filter],
@@ -28,15 +29,20 @@ export default function Messages({
   async function saveReply(openWhatsApp = false) {
     if (!active || !reply.trim()) return
     const text = reply.trim()
-    await replyMessage(active.id, text)
-    setReply('')
-    onUpdate()
-    if (openWhatsApp && active.phone) {
-      window.open(
-        `https://wa.me/${active.phone.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`,
-        '_blank',
-        'noopener,noreferrer',
-      )
+    const waUrl =
+      openWhatsApp && active.phone
+        ? `https://wa.me/${active.phone.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`
+        : null
+    const win = openWhatsApp && active.phone ? window.open('', '_blank') : null
+    setReplyError('')
+    try {
+      await replyMessage(active.id, text)
+      setReply('')
+      onUpdate()
+      if (win && waUrl) win.location.href = waUrl
+    } catch {
+      win?.close()
+      setReplyError('Could not save reply')
     }
   }
 
@@ -150,6 +156,7 @@ export default function Messages({
               Reply on WhatsApp
             </button>
           </div>
+          {replyError && <p className="mt-3 text-sm text-rose-300">{replyError}</p>}
         </div>
       ) : (
         <div className="glass-strong rounded-3xl p-6 text-ember-100/60">
