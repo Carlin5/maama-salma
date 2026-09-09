@@ -14,20 +14,29 @@ export default function Contact() {
   const [story, setStory] = useState('')
   const [ritual, setRitual] = useState('Reconciliation Spell')
   const [submitted, setSubmitted] = useState(false)
+  const [submissionError, setSubmissionError] = useState(false)
   const lastSubmission = useRef('')
 
-  function submit() {
+  async function submit() {
     const content = JSON.stringify({ name, phone, ritual, story })
     if (!name.trim() || !story.trim() || lastSubmission.current === content) return
     lastSubmission.current = content
-    void submitMessage({ name, phone, ritual, story })
+    const result = await submitMessage({ name, phone, ritual, story })
+    if (!result.delivered) lastSubmission.current = ''
   }
 
-  function submitAndClear() {
+  async function submitAndClear() {
     const content = JSON.stringify({ name, phone, ritual, story })
     if (!name.trim() || !story.trim() || lastSubmission.current === content) return
     lastSubmission.current = content
-    void submitMessage({ name, phone, ritual, story })
+    setSubmitted(false)
+    setSubmissionError(false)
+    const result = await submitMessage({ name, phone, ritual, story })
+    if (!result.delivered) {
+      lastSubmission.current = ''
+      setSubmissionError(true)
+      return
+    }
     setSubmitted(true)
     setName('')
     setPhone('')
@@ -59,8 +68,8 @@ ${story || 'Please advise me on a ritual that would help.'}`
             <span className="shimmer-text">Begin your ritual</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl font-serif text-lg md:text-2xl text-ember-100/80">
-            Maama prefers WhatsApp — it lets her hear your voice and read your
-            energy through your own words.
+            Maama prefers WhatsApp — it lets her hear your voice and read your energy through your
+            own words.
           </p>
         </div>
       </section>
@@ -75,12 +84,10 @@ ${story || 'Please advise me on a ritual that would help.'}`
             transition={{ duration: 0.6 }}
             className="glass-strong rounded-3xl p-8 md:col-span-7"
           >
-            <h3 className="font-display text-2xl text-ember-100">
-              Prepare your message
-            </h3>
+            <h3 className="font-display text-2xl text-ember-100">Prepare your message</h3>
             <p className="mt-2 font-serif text-base text-ember-100/75">
-              Fill in the details below — your story will be prefilled into a
-              WhatsApp message to Maama. You can edit it before sending.
+              Fill in the details below — your story will be prefilled into a WhatsApp message to
+              Maama. You can edit it before sending.
             </p>
             <div className="mt-6 grid gap-4">
               <label className="block">
@@ -158,7 +165,7 @@ ${story || 'Please advise me on a ritual that would help.'}`
                   href={buildWhatsApp()}
                   onClick={() => {
                     trackWhatsAppClick('contact form')
-                    submit()
+                    void submit()
                   }}
                   target="_blank"
                   rel="noreferrer"
@@ -166,7 +173,13 @@ ${story || 'Please advise me on a ritual that would help.'}`
                 >
                   Send via WhatsApp
                 </a>
-                <button type="button" onClick={submitAndClear} className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 px-5 py-3 font-display text-xs uppercase tracking-[0.18em] text-ember-200 transition hover:bg-gold-500/10">
+                <button
+                  type="button"
+                  onClick={() => {
+                    void submitAndClear()
+                  }}
+                  className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 px-5 py-3 font-display text-xs uppercase tracking-[0.18em] text-ember-200 transition hover:bg-gold-500/10"
+                >
                   Send to Maama&apos;s inbox
                 </button>
                 <span className="font-serif text-sm text-ember-100/60">
@@ -178,18 +191,21 @@ ${story || 'Please advise me on a ritual that would help.'}`
                   Message received — Maama will reply on WhatsApp.
                 </p>
               )}
+              {submissionError && (
+                <p className="font-serif text-base text-amber-300">
+                  Could not reach Maama&apos;s inbox — please use Send via WhatsApp instead.
+                </p>
+              )}
 
               <p className="mt-6 font-serif text-xs leading-relaxed text-ember-100/55">
-                By contacting Maama Salma you agree to the spiritual practice
-                terms in the{' '}
+                By contacting Maama Salma you agree to the spiritual practice terms in the{' '}
                 <Link
                   to="/disclaimer"
                   className="underline decoration-gold-500/40 underline-offset-4 hover:text-ember-200"
                 >
                   disclaimer
                 </Link>
-                . Results may vary and payments are non-refundable once work has
-                started.
+                . Results may vary and payments are non-refundable once work has started.
               </p>
             </div>
           </motion.div>
@@ -240,8 +256,8 @@ ${story || 'Please advise me on a ritual that would help.'}`
                     Consultation Hours
                   </div>
                   <p className="mt-1 font-serif text-base text-ember-100/80">
-                    Open 7 days a week · Quick replies between 08:00 – 22:00 SAST.
-                    Emergencies any hour.
+                    Open 7 days a week · Quick replies between 08:00 – 22:00 SAST. Emergencies any
+                    hour.
                   </p>
                 </li>
                 <li>
@@ -257,8 +273,8 @@ ${story || 'Please advise me on a ritual that would help.'}`
                     Privacy
                   </div>
                   <p className="mt-1 font-serif text-base text-ember-100/80">
-                    Every message is treated with absolute discretion. Maama
-                    never shares names, photos or stories with anyone.
+                    Every message is treated with absolute discretion. Maama never shares names,
+                    photos or stories with anyone.
                   </p>
                 </li>
               </ul>
@@ -270,8 +286,7 @@ ${story || 'Please advise me on a ritual that would help.'}`
                 eyebrow="✦ First time? ✦"
                 title={
                   <>
-                    Your first <span className="shimmer-text">5 minutes</span> are
-                    on Maama
+                    Your first <span className="shimmer-text">5 minutes</span> are on Maama
                   </>
                 }
                 subtitle="A short free reading helps you decide which ritual is right for your story. No payment is requested before this conversation."

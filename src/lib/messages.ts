@@ -45,9 +45,9 @@ export async function submitMessage(input: {
     })
     const result = (await response.json()) as { id?: string }
     if (!response.ok || !result.id) throw new Error('Unable to submit')
-    return result.id
+    return { id: result.id, delivered: true }
   } catch {
     saveLocal(message)
-    return message.id
+    return { id: message.id, delivered: false }
   }
 }

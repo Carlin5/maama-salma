@@ -4,7 +4,7 @@ import { getJSON, listRange, setJSON } from '../_lib/store.js'
 import type { MessageRecord } from '../../src/lib/aggregate.js'
 
 async function allMessages() {
-  const ids = await listRange<string>('messages', 0, 4999)
+  const ids = await listRange<string>('messages', 0, -1)
   return (await Promise.all(ids.map((id) => getJSON<MessageRecord>(`message:${id}`)))).filter(
     (message): message is MessageRecord => Boolean(message),
   )
