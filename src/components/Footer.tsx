@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { NAV_LINKS, SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 
 export default function Footer() {
   return (
@@ -45,6 +46,7 @@ export default function Footer() {
             <li>
               <a
                 href={SITE.whatsappLink}
+                onClick={() => trackWhatsAppClick('footer')}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 hover:text-ember-200"
@@ -72,6 +74,10 @@ export default function Footer() {
               className="uppercase tracking-[0.25em] text-ember-100/60 transition hover:text-ember-200"
             >
               Disclaimer
+            </Link>
+            <span className="hidden h-3 w-px bg-gold-500/20 md:inline-block" />
+            <Link to="/admin" className="text-ember-100/35 transition hover:text-ember-100/70">
+              Admin
             </Link>
             <span className="hidden h-3 w-px bg-gold-500/20 md:inline-block" />
             <span className="font-display tracking-[0.25em]">

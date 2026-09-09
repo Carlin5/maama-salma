@@ -4,6 +4,7 @@ import SectionHeading from '../components/SectionHeading'
 import Sigil from '../components/Sigil'
 import TiltCard from '../components/TiltCard'
 import { SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 import psychic from '../assets/photos/psychic-reading.jpg'
 import spellBook from '../assets/photos/spell-book.jpg'
 import spellBook2 from '../assets/photos/spell-book-2.jpg'
@@ -171,6 +172,7 @@ export default function Services() {
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a
                 href={SITE.whatsappLink}
+                onClick={() => trackWhatsAppClick('services CTA')}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-ember"

@@ -1,15 +1,38 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
 import Sigil from '../components/Sigil'
 import DisclaimerNotice from '../components/DisclaimerNotice'
 import { SITE } from '../lib/constants'
+import { submitMessage } from '../lib/messages'
+import { trackWhatsAppClick } from '../lib/analytics'
 
 export default function Contact() {
   const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
   const [story, setStory] = useState('')
   const [ritual, setRitual] = useState('Reconciliation Spell')
+  const [submitted, setSubmitted] = useState(false)
+  const lastSubmission = useRef('')
+
+  function submit() {
+    const content = JSON.stringify({ name, phone, ritual, story })
+    if (!name.trim() || !story.trim() || lastSubmission.current === content) return
+    lastSubmission.current = content
+    void submitMessage({ name, phone, ritual, story })
+  }
+
+  function submitAndClear() {
+    const content = JSON.stringify({ name, phone, ritual, story })
+    if (!name.trim() || !story.trim() || lastSubmission.current === content) return
+    lastSubmission.current = content
+    void submitMessage({ name, phone, ritual, story })
+    setSubmitted(true)
+    setName('')
+    setPhone('')
+    setStory('')
+  }
 
   function buildWhatsApp() {
     const text = `Hello Maama Salma 🌹
@@ -75,6 +98,19 @@ ${story || 'Please advise me on a ritual that would help.'}`
 
               <label className="block">
                 <span className="font-display text-[11px] uppercase tracking-[0.25em] text-gold-400">
+                  Your WhatsApp / Phone number
+                </span>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+27 60 403 4585"
+                  className="mt-2 w-full rounded-2xl border border-gold-500/30 bg-midnight-950/60 px-4 py-3 font-serif text-base text-ember-100 placeholder-ember-100/40 outline-none focus:border-gold-400"
+                />
+              </label>
+
+              <label className="block">
+                <span className="font-display text-[11px] uppercase tracking-[0.25em] text-gold-400">
                   Ritual You Are Drawn To
                 </span>
                 <select
@@ -120,16 +156,28 @@ ${story || 'Please advise me on a ritual that would help.'}`
               <div className="mt-2 flex flex-wrap items-center gap-3">
                 <a
                   href={buildWhatsApp()}
+                  onClick={() => {
+                    trackWhatsAppClick('contact form')
+                    submit()
+                  }}
                   target="_blank"
                   rel="noreferrer"
                   className="btn-ember"
                 >
                   Send via WhatsApp
                 </a>
+                <button type="button" onClick={submitAndClear} className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 px-5 py-3 font-display text-xs uppercase tracking-[0.18em] text-ember-200 transition hover:bg-gold-500/10">
+                  Send to Maama&apos;s inbox
+                </button>
                 <span className="font-serif text-sm text-ember-100/60">
                   Replies usually within minutes.
                 </span>
               </div>
+              {submitted && (
+                <p className="font-serif text-base text-emerald-300">
+                  Message received — Maama will reply on WhatsApp.
+                </p>
+              )}
 
               <p className="mt-6 font-serif text-xs leading-relaxed text-ember-100/55">
                 By contacting Maama Salma you agree to the spiritual practice
@@ -163,6 +211,7 @@ ${story || 'Please advise me on a ritual that would help.'}`
                   </div>
                   <a
                     href={SITE.whatsappLink}
+                    onClick={() => trackWhatsAppClick('contact details')}
                     target="_blank"
                     rel="noreferrer"
                     className="mt-1 inline-flex items-center gap-2 font-serif text-xl text-ember-100 hover:text-ember-200"

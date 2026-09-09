@@ -5,6 +5,7 @@ import Sigil from '../components/Sigil'
 import TiltCard from '../components/TiltCard'
 import ParallaxImage from '../components/ParallaxImage'
 import { SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 import spellBook2 from '../assets/photos/spell-book-2.jpg'
 import candleSmoke from '../assets/photos/candle-smoke.jpg'
 import ritualBowls from '../assets/photos/ritual-bowls.jpg'
@@ -98,6 +99,7 @@ export default function About() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={SITE.whatsappLink}
+                onClick={() => trackWhatsAppClick('about CTA')}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-ember"

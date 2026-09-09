@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Sigil from '../components/Sigil'
 import { SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 
 const SECTIONS: { title: string; body: string }[] = [
   {
@@ -87,6 +88,7 @@ export default function Disclaimer() {
               <div className="mt-12 flex flex-wrap items-center gap-3">
                 <a
                   href={SITE.whatsappLink}
+                  onClick={() => trackWhatsAppClick('disclaimer CTA')}
                   target="_blank"
                   rel="noreferrer"
                   className="btn-ember"

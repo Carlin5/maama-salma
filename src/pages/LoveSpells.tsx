@@ -5,6 +5,7 @@ import Sigil from '../components/Sigil'
 import TiltCard from '../components/TiltCard'
 import ParallaxImage from '../components/ParallaxImage'
 import { SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 import reconciliation from '../assets/photos/reconciliation.jpg'
 import lovePortion from '../assets/photos/love-portion.jpg'
 import lovePortion2 from '../assets/photos/love-portion-2.jpg'
@@ -224,6 +225,7 @@ export default function LoveSpells() {
                   <div className="mt-7 flex flex-wrap gap-3">
                     <a
                       href={SITE.whatsappLink}
+                      onClick={() => trackWhatsAppClick('love spells ritual')}
                       target="_blank"
                       rel="noreferrer"
                       className="btn-ember"
@@ -306,6 +308,7 @@ export default function LoveSpells() {
             </p>
             <a
               href={SITE.whatsappLink}
+              onClick={() => trackWhatsAppClick('love spells CTA')}
               target="_blank"
               rel="noreferrer"
               className="btn-ember mt-8"
