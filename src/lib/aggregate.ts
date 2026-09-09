@@ -61,8 +61,7 @@ export type Stats = {
 const dayStart = (date: Date) =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()
 
-const dateKey = (timestamp: number) =>
-  new Date(timestamp).toISOString().slice(0, 10)
+const dateKey = (timestamp: number) => new Date(timestamp).toISOString().slice(0, 10)
 
 function ranked(values: string[]) {
   const counts = new Map<string, number>()

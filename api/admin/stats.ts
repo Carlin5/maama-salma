@@ -1,5 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { aggregateStats, type ClickRecord, type MessageRecord, type VisitRecord } from '../../src/lib/aggregate.js'
+import {
+  aggregateStats,
+  type ClickRecord,
+  type MessageRecord,
+  type VisitRecord,
+} from '../../src/lib/aggregate.js'
 import { verifyToken } from '../_lib/auth.js'
 import { listRange, getJSON } from '../_lib/store.js'
 
@@ -12,8 +17,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const visits = await listRange<VisitRecord>('visits', 0, 4999)
   const clicks = await listRange<ClickRecord>('events', 0, 4999)
   const ids = await listRange<string>('messages', 0, 4999)
-  const messages = (await Promise.all(ids.map((id) => getJSON<MessageRecord>(`message:${id}`)))).filter(
-    (message): message is MessageRecord => Boolean(message),
-  )
+  const messages = (
+    await Promise.all(ids.map((id) => getJSON<MessageRecord>(`message:${id}`)))
+  ).filter((message): message is MessageRecord => Boolean(message))
   return res.status(200).json(aggregateStats(visits, clicks, messages))
 }

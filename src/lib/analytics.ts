@@ -33,7 +33,11 @@ function mirror(key: string, event: EventPayload) {
       country: '',
       city: '',
       ua,
-      device: /tablet|ipad/i.test(ua) ? 'tablet' : /mobile|android|iphone/i.test(ua) ? 'mobile' : 'desktop',
+      device: /tablet|ipad/i.test(ua)
+        ? 'tablet'
+        : /mobile|android|iphone/i.test(ua)
+          ? 'mobile'
+          : 'desktop',
     }
     localStorage.setItem(key, JSON.stringify([enriched, ...existing].slice(0, 500)))
   } catch {

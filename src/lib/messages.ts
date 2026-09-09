@@ -12,8 +12,13 @@ export type LocalMessage = {
 
 function saveLocal(message: LocalMessage) {
   try {
-    const messages = JSON.parse(localStorage.getItem('maama_local_messages') || '[]') as LocalMessage[]
-    localStorage.setItem('maama_local_messages', JSON.stringify([message, ...messages].slice(0, 500)))
+    const messages = JSON.parse(
+      localStorage.getItem('maama_local_messages') || '[]',
+    ) as LocalMessage[]
+    localStorage.setItem(
+      'maama_local_messages',
+      JSON.stringify([message, ...messages].slice(0, 500)),
+    )
   } catch {
     // Ignore storage failures and keep the form flow responsive.
   }

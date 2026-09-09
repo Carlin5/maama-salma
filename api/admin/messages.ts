@@ -5,9 +5,9 @@ import type { MessageRecord } from '../../src/lib/aggregate.js'
 
 async function allMessages() {
   const ids = await listRange<string>('messages', 0, 4999)
-  return (
-    await Promise.all(ids.map((id) => getJSON<MessageRecord>(`message:${id}`)))
-  ).filter((message): message is MessageRecord => Boolean(message))
+  return (await Promise.all(ids.map((id) => getJSON<MessageRecord>(`message:${id}`)))).filter(
+    (message): message is MessageRecord => Boolean(message),
+  )
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

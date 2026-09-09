@@ -8,15 +8,11 @@ function secret() {
 }
 
 function signature(expiry: number) {
-  return createHmac('sha256', secret())
-    .update(`maama-admin:${expiry}`)
-    .digest('base64url')
+  return createHmac('sha256', secret()).update(`maama-admin:${expiry}`).digest('base64url')
 }
 
 export function acceptedPasswords() {
-  return process.env.ADMIN_PASSWORD
-    ? [process.env.ADMIN_PASSWORD]
-    : defaults
+  return process.env.ADMIN_PASSWORD ? [process.env.ADMIN_PASSWORD] : defaults
 }
 
 export function createToken() {

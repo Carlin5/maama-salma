@@ -33,7 +33,10 @@ export async function fetchStats(): Promise<{ data: Stats; fallback: boolean }> 
 
 export async function fetchMessages(): Promise<{ messages: MessageRecord[]; fallback: boolean }> {
   try {
-    return { ...(await request<{ messages: MessageRecord[] }>('/api/admin/messages')), fallback: false }
+    return {
+      ...(await request<{ messages: MessageRecord[] }>('/api/admin/messages')),
+      fallback: false,
+    }
   } catch {
     return { messages: localData().messages, fallback: true }
   }
@@ -46,11 +49,12 @@ export async function replyMessage(id: string, text: string) {
       body: JSON.stringify({ id, text }),
     })
   } catch {
-    const message = localData().messages.find((item: MessageRecord) => item.id === id)
+    const data = localData()
+    const message = data.messages.find((item: MessageRecord) => item.id === id)
     if (!message) throw new Error('Message not found')
     message.replies.push({ ts: Date.now(), text })
     message.status = 'replied'
-    saveLocalMessages(localData().messages)
+    saveLocalMessages(data.messages)
     return message
   }
 }
@@ -62,10 +66,11 @@ export async function setStatus(id: string, status: MessageRecord['status']) {
       body: JSON.stringify({ id, status }),
     })
   } catch {
-    const message = localData().messages.find((item: MessageRecord) => item.id === id)
+    const data = localData()
+    const message = data.messages.find((item: MessageRecord) => item.id === id)
     if (!message) throw new Error('Message not found')
     message.status = status
-    saveLocalMessages(localData().messages)
+    saveLocalMessages(data.messages)
     return message
   }
 }

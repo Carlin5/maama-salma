@@ -10,8 +10,7 @@ const memory = () => {
   return globalThis.__maamaStore
 }
 
-const remote = () =>
-  Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN)
+const remote = () => Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN)
 
 async function command<T>(args: unknown[]): Promise<T> {
   const response = await fetch(process.env.KV_REST_API_URL!, {
@@ -46,7 +45,7 @@ export async function setJSON<T>(key: string, value: T): Promise<void> {
 export async function listPush<T>(key: string, value: T): Promise<void> {
   if (remote()) {
     await command(['LPUSH', key, JSON.stringify(value)])
-    await command(['LTRIM', key, '0', key === 'visits' || key === 'events' ? '4999' : '4999'])
+    await command(['LTRIM', key, '0', '4999'])
     return
   }
   const values = (memory().get(key) as T[] | undefined) || []
