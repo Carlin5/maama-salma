@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
 import { SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 
 export default function WhatsAppButton() {
   return (
     <motion.a
       href={SITE.whatsappLink}
+      onClick={() => trackWhatsAppClick('floating')}
       target="_blank"
       rel="noreferrer"
       aria-label={`WhatsApp Maama Salma at ${SITE.phone}`}

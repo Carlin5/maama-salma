@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { NAV_LINKS, SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
@@ -78,6 +79,7 @@ export default function NavBar() {
 
         <a
           href={SITE.whatsappLink}
+          onClick={() => trackWhatsAppClick('navbar desktop')}
           target="_blank"
           rel="noreferrer"
           className="hidden md:inline-flex btn-ember text-sm"
@@ -133,6 +135,7 @@ export default function NavBar() {
               ))}
               <a
                 href={SITE.whatsappLink}
+                onClick={() => trackWhatsAppClick('navbar mobile')}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-ember mt-2 self-start text-sm"

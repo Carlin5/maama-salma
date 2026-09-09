@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import SectionHeading from '../components/SectionHeading'
 import Sigil from '../components/Sigil'
 import { SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 
 const stories = [
   {
@@ -138,6 +139,7 @@ export default function Testimonials() {
           <div className="mt-10 text-center">
             <a
               href={SITE.whatsappLink}
+              onClick={() => trackWhatsAppClick('testimonials CTA')}
               target="_blank"
               rel="noreferrer"
               className="btn-ember"

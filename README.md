@@ -84,6 +84,20 @@ pnpm build
 
 The current live preview is served from `https://dist-oopuzabu.devinapps.com/`.
 
+## Admin dashboard
+
+The private dashboard is available at `/admin` (it is intentionally not included
+in the public navigation). The default passwords are `Masha@1000` and
+`Masha@123`; set `ADMIN_PASSWORD` in Vercel to replace them. `ADMIN_SECRET`
+controls token signing when set.
+
+For live, site-wide visitor and WhatsApp analytics, configure
+`KV_REST_API_URL` and `KV_REST_API_TOKEN` with Vercel KV or Upstash REST
+credentials. Without those variables, API data uses an in-memory fallback per
+serverless instance and the dashboard mirrors events in this browser's local
+storage. The fallback is useful for local `vercel dev` and static previews,
+but it is not shared between instances.
+
 ## License
 
 All rituals reserved.

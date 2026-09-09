@@ -9,6 +9,8 @@ import About from './pages/About'
 import Testimonials from './pages/Testimonials'
 import Contact from './pages/Contact'
 import Disclaimer from './pages/Disclaimer'
+import AdminApp from './admin/AdminApp'
+import { usePageTracking } from './lib/analytics'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -20,6 +22,8 @@ function ScrollToTop() {
 
 function App() {
   const location = useLocation()
+  usePageTracking(location.pathname)
+  if (location.pathname.startsWith('/admin')) return <AdminApp />
   return (
     <Layout>
       <ScrollToTop />

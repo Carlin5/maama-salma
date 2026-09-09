@@ -8,6 +8,7 @@ import ParallaxImage from '../components/ParallaxImage'
 import HeartBurst from '../components/HeartBurst'
 import DisclaimerNotice from '../components/DisclaimerNotice'
 import { SITE } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/analytics'
 import candleSmoke from '../assets/photos/candle-smoke.jpg'
 import lovePortion from '../assets/photos/love-portion.jpg'
 import coupleHearts from '../assets/photos/couple-hearts.jpg'
@@ -76,7 +77,7 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.45 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
-            <a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="btn-ember">
+            <a href={SITE.whatsappLink} onClick={() => trackWhatsAppClick('home hero')} target="_blank" rel="noreferrer" className="btn-ember">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19.05 4.91A10 10 0 0 0 4.96 18.5L4 22l3.62-.95A10 10 0 1 0 19.05 4.91Z" />
               </svg>
@@ -148,6 +149,7 @@ export default function Home() {
               </Link>
               <a
                 href={SITE.whatsappLink}
+                onClick={() => trackWhatsAppClick('home consultation')}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 px-6 py-3 font-display text-xs uppercase tracking-[0.25em] text-ember-200 hover:bg-gold-500/10"
@@ -504,7 +506,7 @@ export default function Home() {
               free. No judgement, only light.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="btn-ember">
+              <a href={SITE.whatsappLink} onClick={() => trackWhatsAppClick('home final CTA')} target="_blank" rel="noreferrer" className="btn-ember">
                 Begin Your Ritual
               </a>
               <Link
