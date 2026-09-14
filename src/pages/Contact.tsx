@@ -50,7 +50,7 @@ My name is ${name || '...'}
 I am interested in: ${ritual}
 
 ${story || 'Please advise me on a ritual that would help.'}`
-    return `https://wa.me/27604034585?text=${encodeURIComponent(text)}`
+    return `https://wa.me/${SITE.phoneRaw.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`
   }
 
   return (
@@ -111,7 +111,7 @@ ${story || 'Please advise me on a ritual that would help.'}`
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="+27 60 403 4585"
+                  placeholder={SITE.phone}
                   className="mt-2 w-full rounded-2xl border border-gold-500/30 bg-midnight-950/60 px-4 py-3 font-serif text-base text-ember-100 placeholder-ember-100/40 outline-none focus:border-gold-400"
                 />
               </label>
@@ -249,6 +249,17 @@ ${story || 'Please advise me on a ritual that would help.'}`
                     className="mt-1 inline-block font-serif text-xl text-ember-100 hover:text-ember-200"
                   >
                     {SITE.phone}
+                  </a>
+                </li>
+                <li>
+                  <div className="font-display text-[11px] uppercase tracking-[0.25em] text-gold-400">
+                    Email
+                  </div>
+                  <a
+                    href={`mailto:${SITE.email}`}
+                    className="mt-1 inline-block font-serif text-xl text-ember-100 hover:text-ember-200"
+                  >
+                    {SITE.email}
                   </a>
                 </li>
                 <li>
