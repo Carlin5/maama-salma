@@ -1,6 +1,6 @@
 # Maama Salma — Sacred Love Spells & Ritual Healing
 
-A multi-page React + TypeScript site for spiritual healer **Maama Salma**, built around love spells, reconciliation rituals and ancestral practice. Layered 2D / 3D animations and an always-visible WhatsApp CTA to **+27 60 403 4585** make it easy for visitors to reach out the moment they're ready.
+A multi-page React + TypeScript site for spiritual healer **Maama Salma**, built around love spells, reconciliation rituals and ancestral practice. Layered 2D / 3D animations and an always-visible WhatsApp CTA to **+27 63 007 0453** make it easy for visitors to reach out the moment they're ready.
 
 **Live preview:** https://dist-oopuzabu.devinapps.com/
 

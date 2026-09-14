@@ -59,6 +59,11 @@ export default function Footer() {
                 <span>WhatsApp · {SITE.phone}</span>
               </a>
             </li>
+            <li>
+              <a href={`mailto:${SITE.email}`} className="hover:text-ember-200">
+                {SITE.email}
+              </a>
+            </li>
             <li className="text-ember-100/60 text-sm">
               Consultations available daily · responses within minutes.
             </li>
